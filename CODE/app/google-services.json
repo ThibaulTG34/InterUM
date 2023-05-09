@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "402769695548",
+    "project_id": "interum-b56eb",
+    "storage_bucket": "interum-b56eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402769695548:android:2364ea73a79bd2b300c439",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402769695548-ci0okpos4kfcqdgcuunpk7nktf9vubkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRYGVfvUPqDUq01hpWIuKj9DQUW7C9UAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402769695548-ci0okpos4kfcqdgcuunpk7nktf9vubkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402769695548:android:76fe1cdcddef7e0e00c439",
+        "android_client_info": {
+          "package_name": "com.example.interum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402769695548-ci0okpos4kfcqdgcuunpk7nktf9vubkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRYGVfvUPqDUq01hpWIuKj9DQUW7C9UAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402769695548-ci0okpos4kfcqdgcuunpk7nktf9vubkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
