@@ -1,8 +1,10 @@
 package com.example.interum;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,8 +49,8 @@ public class ListOffre extends AppCompatActivity {
         TextView entreprise3 = findViewById(R.id.textView31);
         TextView ville3 = findViewById(R.id.textView32);
 
-        Bundle extras = getIntent().getExtras();
-        String city = extras.getString("location");
+
+        String city = getIntent().getStringExtra("location");
 
         db.collection("accepter")
                 .get()
@@ -88,5 +90,26 @@ public class ListOffre extends AppCompatActivity {
                         Log.w(TAG, "Error getting documents.", task.getException());
                     }
                 });
+
+        Button candidater0 = findViewById(R.id.candidater0);
+        Button candidater1 = findViewById(R.id.candidater1);
+        Button candidater2 = findViewById(R.id.candidater2);
+        Intent intention = new Intent(ListOffre.this, Candidature.class);
+        candidater0.setOnClickListener(view ->{
+            intention.putExtra("NomOffre", titre.getText().toString());
+            intention.putExtra("Ville", ville.getText().toString());
+            startActivity(intention);
+        });
+        candidater1.setOnClickListener(view ->{
+            intention.putExtra("NomOffre", titre2.getText().toString());
+            intention.putExtra("Ville", ville2.getText().toString());
+            startActivity(intention);
+
+        });
+        candidater2.setOnClickListener(view ->{
+            intention.putExtra("NomOffre", titre3.getText().toString());
+            intention.putExtra("Ville", ville3.getText().toString());
+            startActivity(intention);
+        });
     }
 }

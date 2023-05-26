@@ -85,7 +85,7 @@ public class Authentification extends AppCompatActivity {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(Authentification.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
-                        Intent intention = new Intent(Authentification.this, accueil_entreprise.class);
+                        Intent intention = new Intent(Authentification.this, ListOffre.class);
                         startActivity(intention);
 
                     }

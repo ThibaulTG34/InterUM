@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF">
 
     <TextView
         android:id="@+id/textView30"
@@ -168,4 +169,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView26"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/candidater0"
+        android:layout_width="203dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Déposer Candidature"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="#2196F3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        tools:ignore="TouchTargetSizeCheck"/>
+
+    <Button
+        android:id="@+id/candidater1"
+        android:layout_width="203dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Déposer Candidature"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="#2196F3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27"
+        tools:ignore="TouchTargetSizeCheck"/>
+
+    <Button
+        android:id="@+id/candidater2"
+        android:layout_width="203dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Déposer Candidature"
+        android:textAlignment="textEnd"
+        android:textAllCaps="false"
+        android:textColor="#2196F3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
+        tools:ignore="TouchTargetSizeCheck"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
