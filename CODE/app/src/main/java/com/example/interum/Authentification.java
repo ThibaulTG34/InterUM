@@ -44,7 +44,20 @@ public class Authentification extends AppCompatActivity {
         });
 
         inscription.setOnClickListener(view -> {
-            Intent intention = new Intent(Authentification.this, Inscription.class);
+
+            Intent intention;
+            switch(MainActivity.userType)
+            {
+                case COMPANY:
+                    intention = new Intent(Authentification.this, ConnexionEntreprise.class);
+                    break;
+                case AGENCY:
+                    intention = new Intent(Authentification.this, ConnexionAgence.class);
+                    break;
+                default: //Candidate
+                    intention = new Intent(Authentification.this, Inscription.class);
+                    break;
+            }
             startActivity(intention);
         });
     }
@@ -56,12 +69,24 @@ public class Authentification extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intention = new Intent(Authentification.this, geolocalisation.class);
+                        Intent intention;
+                        switch(MainActivity.userType)
+                        {
+                            case COMPANY:
+                            case AGENCY:
+                                intention = new Intent(Authentification.this, accueil_entreprise.class);
+                                break;
+                            default: //Candidate
+                                intention = new Intent(Authentification.this, geolocalisation.class);
+                                break;
+                        }
                         startActivity(intention);
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(Authentification.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
+                        Intent intention = new Intent(Authentification.this, accueil_entreprise.class);
+                        startActivity(intention);
 
                     }
                 });

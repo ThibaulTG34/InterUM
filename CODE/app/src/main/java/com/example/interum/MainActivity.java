@@ -8,6 +8,17 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    public enum UserType
+    {
+        CANDIDATE,
+        COMPANY,
+        AGENCY,
+        MANAGER,
+        SUPER_MANAGER;
+    };
+
+    public static UserType userType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intention);
         });
         enterprise.setOnClickListener(view -> {
-            Intent intention = new Intent(MainActivity.this, ConnexionEntreprise.class);
+            Intent intention = new Intent(MainActivity.this, Authentification.class);
+            userType = UserType.COMPANY;
             startActivity(intention);
         });
         agence.setOnClickListener(view -> {
-            Intent intention = new Intent(MainActivity.this, ConnexionAgence.class);
+            Intent intention = new Intent(MainActivity.this, Authentification.class);
+            userType = UserType.AGENCY;
             startActivity(intention);
         });
 
