@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -83,6 +84,7 @@ public class geolocalisation extends AppCompatActivity {
                     Intent intention = new Intent(geolocalisation.this, ListOffre.class);
                     intention.putExtra("location", city);
                     startActivity(intention);
+
                 }
 
                 public void onStatusChanged(String provider, int status, Bundle extras) {}

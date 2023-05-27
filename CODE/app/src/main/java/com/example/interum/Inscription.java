@@ -83,8 +83,6 @@ public class Inscription extends AppCompatActivity {
                     Toast.makeText(this, "Entrez un numéro de téléphone valide", Toast.LENGTH_LONG).show();
                 }
             }
-
-
         });
 
     }

@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,6 +31,10 @@ import java.util.Objects;
 public class ListOffre extends AppCompatActivity {
 
     private static final String TAG = "DATABASE : ";
+    private static final int NB_OFFRE = 5;
+    private Boolean _switchIMAGE = false;
+    private Boolean _switchDESCRIPTION = false;
+    private int visibily;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -51,65 +58,38 @@ public class ListOffre extends AppCompatActivity {
 
 
         String city = getIntent().getStringExtra("location");
+        //TextView titre4 = findViewById(R.id.textView34);
+        //TextView entreprise4 = findViewById(R.id.textView35);
+        //TextView ville4 = findViewById(R.id.textView36);
 
-        db.collection("accepter")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
+        //TextView titre5 = findViewById(R.id.textView38);
+        //TextView entreprise5 = findViewById(R.id.textView39);
+        //TextView ville5 = findViewById(R.id.textView40);
 
-                        if(!Objects.equals(city, "")) {
+        ImageButton hideButton1 = findViewById(R.id.imageButton6);
+        ImageButton hideButton2 = findViewById(R.id.imageButton7);
+        ImageButton hideButton3 = findViewById(R.id.imageButton8);
+        ImageButton hideButton4 = findViewById(R.id.imageButton9);
+        ImageButton hideButton5 = findViewById(R.id.imageButton10);
 
-                            titre.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(0).getData()).get("titre"));
-                            entreprise.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(0).getData()).get("entreprise"));
-                            ville.setText(city);
+        Button seeMoreButton1 = findViewById(R.id.button16);
+        Button seeMoreButton2 = findViewById(R.id.button17);
+        Button seeMoreButton3 = findViewById(R.id.button18);
+        Button seeMoreButton4 = findViewById(R.id.button19);
+        Button seeMoreButton5 = findViewById(R.id.button20);
 
-                            titre2.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(1).getData()).get("titre"));
-                            entreprise2.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(1).getData()).get("entreprise"));
-                            ville2.setText(city);
+        TextView Description1 = findViewById(R.id.textView41);
+        Button seeLess = findViewById(R.id.button21);
 
-                            titre3.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(2).getData()).get("titre"));
-                            entreprise3.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(2).getData()).get("entreprise"));
-                            ville3.setText(city);
-                        }
-                        else {
+        //TextView[] titres = {titre, titre2, titre3, titre4, titre5};
+        //TextView[] entreprises = {entreprise, entreprise2, entreprise3, entreprise4, entreprise5};
+        //TextView[] villes_tv = {ville, ville2, ville3, ville4, ville5};
 
-                            titre.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(0).getData()).get("titre"));
-                            entreprise.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(0).getData()).get("entreprise"));
-                            ville.setText("Toulouse");
+        ImageButton [] imageButtons = {hideButton1, hideButton2, hideButton3, hideButton4, hideButton5};
+        Button [] buttons = {seeMoreButton1, seeMoreButton2, seeMoreButton3, seeMoreButton4, seeMoreButton5};
 
-                            titre2.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(1).getData()).get("titre"));
-                            entreprise2.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(1).getData()).get("entreprise"));
-                            ville2.setText("Montpellier");
+        Bundle extras = getIntent().getExtras();
+        //String city = extras.getString("location");
 
-                            titre3.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(2).getData()).get("titre"));
-                            entreprise3.setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(2).getData()).get("entreprise"));
-                            ville3.setText("Nîmes");
-                        }
-
-                    } else {
-                        Log.w(TAG, "Error getting documents.", task.getException());
-                    }
-                });
-
-        Button candidater0 = findViewById(R.id.candidater0);
-        Button candidater1 = findViewById(R.id.candidater1);
-        Button candidater2 = findViewById(R.id.candidater2);
-        Intent intention = new Intent(ListOffre.this, Candidature.class);
-        candidater0.setOnClickListener(view ->{
-            intention.putExtra("NomOffre", titre.getText().toString());
-            intention.putExtra("Ville", ville.getText().toString());
-            startActivity(intention);
-        });
-        candidater1.setOnClickListener(view ->{
-            intention.putExtra("NomOffre", titre2.getText().toString());
-            intention.putExtra("Ville", ville2.getText().toString());
-            startActivity(intention);
-
-        });
-        candidater2.setOnClickListener(view ->{
-            intention.putExtra("NomOffre", titre3.getText().toString());
-            intention.putExtra("Ville", ville3.getText().toString());
-            startActivity(intention);
-        });
     }
 }
