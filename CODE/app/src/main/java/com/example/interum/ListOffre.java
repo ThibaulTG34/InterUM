@@ -31,7 +31,7 @@ import java.util.Objects;
 public class ListOffre extends AppCompatActivity {
 
     private static final String TAG = "DATABASE : ";
-    private static final int NB_OFFRE = 5;
+    private static final int NB_OFFRE = 3;
     private Boolean _switchIMAGE = false;
     private Boolean _switchDESCRIPTION = false;
     private int visibily;
@@ -54,42 +54,58 @@ public class ListOffre extends AppCompatActivity {
 
         TextView titre3 = findViewById(R.id.textView30);
         TextView entreprise3 = findViewById(R.id.textView31);
-        TextView ville3 = findViewById(R.id.textView32);
+        TextView ville3 = findViewById(R.id.textView40);
 
-
-        String city = getIntent().getStringExtra("location");
-        //TextView titre4 = findViewById(R.id.textView34);
-        //TextView entreprise4 = findViewById(R.id.textView35);
-        //TextView ville4 = findViewById(R.id.textView36);
-
-        //TextView titre5 = findViewById(R.id.textView38);
-        //TextView entreprise5 = findViewById(R.id.textView39);
-        //TextView ville5 = findViewById(R.id.textView40);
 
         ImageButton hideButton1 = findViewById(R.id.imageButton6);
         ImageButton hideButton2 = findViewById(R.id.imageButton7);
         ImageButton hideButton3 = findViewById(R.id.imageButton8);
         ImageButton hideButton4 = findViewById(R.id.imageButton9);
-        ImageButton hideButton5 = findViewById(R.id.imageButton10);
 
         Button seeMoreButton1 = findViewById(R.id.button16);
         Button seeMoreButton2 = findViewById(R.id.button17);
-        Button seeMoreButton3 = findViewById(R.id.button18);
-        Button seeMoreButton4 = findViewById(R.id.button19);
-        Button seeMoreButton5 = findViewById(R.id.button20);
+        Button seeMoreButton3 = findViewById(R.id.button19);
 
-        TextView Description1 = findViewById(R.id.textView41);
-        Button seeLess = findViewById(R.id.button21);
+        TextView[] titres = {titre, titre2, titre3};
+        TextView[] entreprises = {entreprise, entreprise2, entreprise3};
+        TextView[] villes_tv = {ville, ville2, ville3};
 
-        //TextView[] titres = {titre, titre2, titre3, titre4, titre5};
-        //TextView[] entreprises = {entreprise, entreprise2, entreprise3, entreprise4, entreprise5};
-        //TextView[] villes_tv = {ville, ville2, ville3, ville4, ville5};
+        ImageButton [] imageButtons = {hideButton1, hideButton2, hideButton3};
+        Button [] buttons = {seeMoreButton1, seeMoreButton2, seeMoreButton3};
 
-        ImageButton [] imageButtons = {hideButton1, hideButton2, hideButton3, hideButton4, hideButton5};
-        Button [] buttons = {seeMoreButton1, seeMoreButton2, seeMoreButton3, seeMoreButton4, seeMoreButton5};
+        String city = getIntent().getStringExtra("location");
 
-        Bundle extras = getIntent().getExtras();
-        //String city = extras.getString("location");
-
+        if(city!= null && !city.equals(""))
+        {
+            db.collection("accepter")
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (int i=0; i<NB_OFFRE; i++) {
+                                titres[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("titre"));
+                                entreprises[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("entreprise"));
+                                villes_tv[i].setText(city);
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    });
+        }
+        else
+        {
+            db.collection("refuser")
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for(int i=0; i<NB_OFFRE; i++) {
+                                titres[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("titre"));
+                                entreprises[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("entreprise"));
+                                villes_tv[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("ville"));
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    });
+        }
     }
 }
