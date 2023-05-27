@@ -46,19 +46,20 @@ public class Authentification extends AppCompatActivity {
         inscription.setOnClickListener(view -> {
 
             Intent intention;
-            switch(MainActivity.userType)
-            {
-                case COMPANY:
-                    intention = new Intent(Authentification.this, ConnexionEntreprise.class);
-                    break;
-                case AGENCY:
-                    intention = new Intent(Authentification.this, ConnexionAgence.class);
-                    break;
-                default: //Candidate
-                    intention = new Intent(Authentification.this, Inscription.class);
-                    break;
-            }
-            startActivity(intention);
+
+                switch (MainActivity.userType) {
+                    case COMPANY:
+                        intention = new Intent(Authentification.this, ConnexionEntreprise.class);
+                        break;
+                    case AGENCY:
+                        intention = new Intent(Authentification.this, ConnexionAgence.class);
+                        break;
+                    default: //Candidate
+                        intention = new Intent(Authentification.this, Inscription.class);
+                        break;
+                }
+                startActivity(intention);
+
         });
     }
 
@@ -77,7 +78,7 @@ public class Authentification extends AppCompatActivity {
                                 intention = new Intent(Authentification.this, accueil_entreprise.class);
                                 break;
                             default: //Candidate
-                                intention = new Intent(Authentification.this, geolocalisation.class);
+                                intention = new Intent(Authentification.this, MenuCandidat.class);
                                 break;
                         }
                         startActivity(intention);
@@ -85,6 +86,8 @@ public class Authentification extends AppCompatActivity {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(Authentification.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
+                        //Intent intention = new Intent(Authentification.this, MenuCandidat.class);
+                        //startActivity(intention);
 
                     }
                 });
