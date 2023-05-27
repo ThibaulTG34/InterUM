@@ -41,11 +41,12 @@
         android:id="@+id/SeeJobs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="137dp"
         android:layout_marginTop="36dp"
         android:backgroundTint="#FF1100"
         android:text="Mes emplois"
-        app:layout_constraintTop_toBottomOf="@+id/SeeCandidatures"
-        tools:layout_editor_absoluteX="137dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SeeCandidatures" />
 
     <Button
         android:id="@+id/SeeAlerts"
