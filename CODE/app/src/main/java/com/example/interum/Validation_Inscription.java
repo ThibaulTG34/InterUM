@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -24,8 +26,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Validation_Inscription extends AppCompatActivity {
@@ -73,7 +79,36 @@ public class Validation_Inscription extends AppCompatActivity {
                                 Log.d(TAG, "Email sent.");
                                 if(user.isEmailVerified())
                                 {
-                                    Intent intention = new Intent(Validation_Inscription.this, MenuCandidat.class);
+                                    Intent intention;
+                                    if(MainActivity.userType == MainActivity.UserType.COMPANY)
+                                    {
+                                        String userID = user.getUid();
+                                        FirebaseFirestore db  = FirebaseFirestore.getInstance();
+                                        Map<String, Object> entrepriseData = new HashMap<>();
+                                        entrepriseData.put("Nom", getIntent().getStringExtra("NomEntreprise"));
+                                        entrepriseData.put("Siret", getIntent().getStringExtra("Siret"));
+                                        entrepriseData.put("Id", getIntent().getStringExtra("IdEntreprise"));
+
+                                        db.collection("entreprises").document(userID)
+                                                .set(entrepriseData)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(Validation_Inscription.this, "Entreprise enregistrée avec succès.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(Validation_Inscription.this, "Échec de l'enregistrement de l'entreprise.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                        intention = new Intent(Validation_Inscription.this, accueil_entreprise.class);
+                                    }
+                                    else{
+                                        intention = new Intent(Validation_Inscription.this, MenuCandidat.class);
+                                    }
+
                                     startActivity(intention);
                                 }
                             }

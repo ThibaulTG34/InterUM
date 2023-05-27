@@ -80,6 +80,7 @@ public class Candidature extends AppCompatActivity {
             candidatureData.put("ville", city.getText().toString());
             candidatureData.put("tél", tel.getText().toString());
             candidatureData.put("pays", country.getSelectedCountryName().toString());
+            candidatureData.put("etat", "En Attente");
 
             db.collection("candidature")
                     .add(candidatureData)

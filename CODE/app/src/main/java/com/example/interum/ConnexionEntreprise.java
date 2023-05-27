@@ -88,25 +88,9 @@ public class ConnexionEntreprise extends AppCompatActivity {
                         Intent intention = new Intent(ConnexionEntreprise.this, Validation_Inscription.class);
 
                         // TODO : déplacer dans validation inscription en envoyant en extra dans l'intent pour avoir le currentUser id.
-                        FirebaseFirestore db  = FirebaseFirestore.getInstance();
-                        Map<String, Object> entrepriseData = new HashMap<>();
-                        entrepriseData.put("Nom", this.nom);
-                        entrepriseData.put("Siret", this.siret);
-                        entrepriseData.put("Id", this.id);
-                        db.collection("entreprises")
-                                .add(entrepriseData)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(ConnexionEntreprise.this, "Votre entreprise a été enregistrée avec succès.", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(ConnexionEntreprise.this, "Échec de l'enregistrement de l'entreprise.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        intention.putExtra("NomEntreprise", this.nom);
+                        intention.putExtra("Siret", this.siret);
+                        intention.putExtra("IdEntreprise", this.id);
                         //intention.putExtra("tel", telephone.getText().toString());
                         startActivity(intention);
                         valide = true;
