@@ -71,11 +71,6 @@ public class Validation_Inscription extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "Email sent.");
-                                if(user.isEmailVerified())
-                                {
-                                    Intent intention = new Intent(Validation_Inscription.this, MenuCandidat.class);
-                                    startActivity(intention);
-                                }
                             }
                         });
             }
@@ -121,7 +116,6 @@ public class Validation_Inscription extends AppCompatActivity {
                                 .build();
                 PhoneAuthProvider.verifyPhoneNumber(options);
 
-
                 enterCode.setVisibility(View.VISIBLE);
                 number.setVisibility(View.VISIBLE);
                 ok.setVisibility(View.VISIBLE);
@@ -139,9 +133,27 @@ public class Validation_Inscription extends AppCompatActivity {
                         FirebaseUser user = task.getResult().getUser();
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        task.getException();
                     }
                 });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            user.reload()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            if (user.isEmailVerified()) {
+                                Intent intention = new Intent(Validation_Inscription.this, MenuCandidat.class);
+                                startActivity(intention);
+                            }
+                        } else {
+                            Toast.makeText(Validation_Inscription.this, "L'envoi de mail de confirmation a échoué.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }//fin de onResume
 
 }
