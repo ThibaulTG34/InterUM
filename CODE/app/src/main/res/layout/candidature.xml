@@ -140,8 +140,8 @@
         android:id="@+id/textView45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="12dp"
         android:text="Lettre de Motivation "
         app:layout_constraintBottom_toTopOf="@+id/Upload1"
         app:layout_constraintEnd_toEndOf="parent" />

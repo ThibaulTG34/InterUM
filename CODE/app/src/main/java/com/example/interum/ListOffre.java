@@ -17,11 +17,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
+import com.google.rpc.context.AttributeContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -107,5 +109,39 @@ public class ListOffre extends AppCompatActivity {
                         }
                     });
         }
+        boolean isConnnected = FirebaseAuth.getInstance().getCurrentUser() != null;
+
+        Intent candidating = new Intent(ListOffre.this, Candidature.class);
+        findViewById(R.id.candidater0).setOnClickListener(view->{
+            if(isConnnected) {
+                candidating.putExtra("NomOffre", titres[0].getText().toString());
+                candidating.putExtra("Entreprise", entreprises[0].getText().toString());
+                startActivity(candidating);
+
+            }
+            else
+                startActivity(new Intent(ListOffre.this, Authentification.class));
+
+        });
+
+        findViewById(R.id.candidater1).setOnClickListener(view->{
+            if(isConnnected) {
+                candidating.putExtra("NomOffre", titres[1].getText().toString());
+                candidating.putExtra("Entreprise", entreprises[1].getText().toString());
+                startActivity(candidating);
+            }
+            else
+                startActivity(new Intent(ListOffre.this, Authentification.class));
+        });
+
+        findViewById(R.id.candidater2).setOnClickListener(view->{
+            if(isConnnected){
+                candidating.putExtra("NomOffre", titres[2].getText().toString());
+                candidating.putExtra("Entreprise", entreprises[1].getText().toString());
+                startActivity(candidating);
+            }
+            else
+                startActivity(new Intent(ListOffre.this, Authentification.class));
+        });
     }
 }

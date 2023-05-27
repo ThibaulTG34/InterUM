@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="549dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/NomCandidat0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NomCandidat" />
+
+            <TextView
+                android:id="@+id/Poste0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Poste" />
+
+            <Button
+                android:id="@+id/More0"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F1ECEC"
+                android:text="En Savoir plus"
+                android:textColor="#2196F3" />
+
+            <Button
+                android:id="@+id/Accept0"
+                android:layout_width="206dp"
+                android:layout_height="59dp"
+                android:backgroundTint="#FF0000"
+                android:text="Accepter" />
+
+            <Button
+                android:id="@+id/Refuse0"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF0000"
+                android:text="Refuser" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_enterprise" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="Candidatures Non Traitées"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+</androidx.constraintlayout.widget.ConstraintLayout>

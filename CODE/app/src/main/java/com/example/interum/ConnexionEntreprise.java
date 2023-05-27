@@ -1,16 +1,35 @@
 package com.example.interum;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ConnexionEntreprise extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private boolean valide;
+
+    String nom, siret, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +42,11 @@ public class ConnexionEntreprise extends AppCompatActivity {
         EditText nom = findViewById(R.id.editTextTextPersonName3);
         EditText id = findViewById(R.id.editTextTextPersonName8);
         EditText password = findViewById(R.id.editTextTextPersonName9);
+
+        this.nom = nom.getText().toString();
+        this.siret = siret.getText().toString();
+        this.id = id.getText().toString();
+
 
         //EditText birth = findViewById(R.id.editTextTextPersonName6);
 
@@ -52,5 +76,46 @@ public class ConnexionEntreprise extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void createAccount(String email, String password) {
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent intention = new Intent(ConnexionEntreprise.this, Validation_Inscription.class);
+
+                        // TODO : déplacer dans validation inscription en envoyant en extra dans l'intent pour avoir le currentUser id.
+                        FirebaseFirestore db  = FirebaseFirestore.getInstance();
+                        Map<String, Object> entrepriseData = new HashMap<>();
+                        entrepriseData.put("Nom", this.nom);
+                        entrepriseData.put("Siret", this.siret);
+                        entrepriseData.put("Id", this.id);
+                        db.collection("entreprises")
+                                .add(entrepriseData)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(ConnexionEntreprise.this, "Votre entreprise a été enregistrée avec succès.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ConnexionEntreprise.this, "Échec de l'enregistrement de l'entreprise.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        //intention.putExtra("tel", telephone.getText().toString());
+                        startActivity(intention);
+                        valide = true;
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(ConnexionEntreprise.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        valide = false;
+                    }
+                });
     }
 }
