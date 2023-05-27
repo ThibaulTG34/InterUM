@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthSettings;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -31,6 +34,9 @@ public class Validation_Inscription extends AppCompatActivity {
     private FirebaseUser user;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private FirebaseAuthSettings firebaseAuthSettings;
+    private String mVerificationId;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +51,17 @@ public class Validation_Inscription extends AppCompatActivity {
         CheckBox email = findViewById(R.id.checkBox);
         CheckBox telephone = findViewById(R.id.checkBox2);
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         firebaseAuthSettings = auth.getFirebaseAuthSettings();
 
-
+        ok.setOnClickListener(view -> {
+            String verificationCode = number.getText().toString().trim();
+            if(!verificationCode.equals(""))
+            {
+                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, verificationCode);
+                signInWithPhoneAuthCredential(credential);
+            }
+        });
 
         valider.setOnClickListener(view -> {
 
@@ -61,7 +73,7 @@ public class Validation_Inscription extends AppCompatActivity {
                                 Log.d(TAG, "Email sent.");
                                 if(user.isEmailVerified())
                                 {
-                                    Intent intention = new Intent(Validation_Inscription.this, geolocalisation.class);
+                                    Intent intention = new Intent(Validation_Inscription.this, MenuCandidat.class);
                                     startActivity(intention);
                                 }
                             }
@@ -82,17 +94,22 @@ public class Validation_Inscription extends AppCompatActivity {
                     tel.append(" ");
                 }
                 Log.d(TAG, tel.toString());
-                //firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phoneNumber, "123456");
                 mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                        Intent intention = new Intent(Validation_Inscription.this, geolocalisation.class);
-                        startActivity(intention);
+
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
 
+                    }
+
+                    public void onCodeSent(@NonNull String verificationId,
+                                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                        Log.d(TAG, "onCodeSent:" + verificationId);
+                        mVerificationId = verificationId;
+                        mResendToken = token;
                     }
                 };
                 PhoneAuthOptions options =
@@ -108,11 +125,23 @@ public class Validation_Inscription extends AppCompatActivity {
                 enterCode.setVisibility(View.VISIBLE);
                 number.setVisibility(View.VISIBLE);
                 ok.setVisibility(View.VISIBLE);
-
             }
-
-
         });
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "signInWithCredential:success");
+                        Intent intention = new Intent(Validation_Inscription.this, MenuCandidat.class);
+                        startActivity(intention);
+                        FirebaseUser user = task.getResult().getUser();
+                    } else {
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        task.getException();
+                    }
+                });
     }
 
 }

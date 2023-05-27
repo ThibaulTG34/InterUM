@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         candidate.setOnClickListener(view -> {
             Intent intention = new Intent(MainActivity.this, Authentification.class);
+            userType = UserType.CANDIDATE;
             startActivity(intention);
         });
         enterprise.setOnClickListener(view -> {

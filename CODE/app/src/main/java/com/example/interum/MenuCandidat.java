@@ -18,15 +18,15 @@ public class MenuCandidat extends AppCompatActivity {
         });
 
         findViewById(R.id.SeeCandidatures).setOnClickListener(view ->{
-            startActivity(new Intent(MenuCandidat.this, ListOffre.class));
+            startActivity(new Intent(MenuCandidat.this, mesCandidatures.class));
         });
 
         findViewById(R.id.SeeJobs).setOnClickListener(view ->{
-            startActivity(new Intent(MenuCandidat.this, ListOffre.class));
+            startActivity(new Intent(MenuCandidat.this, mesEmplois.class));
         });
 
         findViewById(R.id.SeeAlerts).setOnClickListener(view ->{
-            startActivity(new Intent(MenuCandidat.this, ListOffre.class));
+            startActivity(new Intent(MenuCandidat.this, mesNotifications.class));
         });
     }
 }
