@@ -9,14 +9,14 @@
 
     <TextView
         android:id="@+id/textView40"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="342dp"
+        android:layout_height="16dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView31"
         app:layout_constraintVertical_bias="0.0" />
@@ -46,19 +46,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView27"
         app:layout_constraintVertical_bias="0.169" />
 
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="269dp"
-        android:layout_height="21dp"
-        android:text="TextView"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        app:layout_constraintVertical_bias="0.122" />
 
     <TextView
         android:id="@+id/textView19"
@@ -203,33 +190,35 @@
         app:layout_constraintTop_toBottomOf="@+id/textView27"
         tools:ignore="TouchTargetSizeCheck"/>
 
+
     <Button
         android:id="@+id/candidater2"
         android:layout_width="203dp"
         android:layout_height="43dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="#FFFFFF"
         android:text="Déposer Candidature"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textColor="#2196F3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32"
-        tools:ignore="TouchTargetSizeCheck"/>
-
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        app:layout_constraintVertical_bias="0.118"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView31"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="379dp"
+        android:layout_height="23dp"
         android:layout_marginBottom="208dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/textView30"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -263,37 +252,6 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/button18"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#FF0000"
-        android:text="+"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/textView32"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.795"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView30"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/button21"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#FF0000"
-        android:text="-"
-        android:textAlignment="viewStart"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/textView41"
-        app:layout_constraintEnd_toEndOf="@+id/textView41"
-        app:layout_constraintHorizontal_bias="0.907"
-        app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintVertical_bias="0.934"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
         android:id="@+id/button19"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -308,19 +266,6 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Button
-        android:id="@+id/button20"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#FF0000"
-        android:text="+"
-        android:textAlignment="viewStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.795"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
-
     <ImageButton
         android:id="@+id/imageButton6"
         android:layout_width="49dp"
@@ -331,7 +276,7 @@
         app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toEndOf="@+id/button16"
         app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintVertical_bias="0.666"
+        app:layout_constraintVertical_bias="0.333"
         app:srcCompat="@drawable/oeil2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -353,13 +298,10 @@
         android:id="@+id/imageButton8"
         android:layout_width="49dp"
         android:layout_height="39dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#FF0000"
-        app:layout_constraintBottom_toTopOf="@+id/textView32"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
-        app:layout_constraintStart_toEndOf="@+id/button18"
         app:layout_constraintTop_toTopOf="@+id/button17"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/oeil2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -367,39 +309,15 @@
         android:id="@+id/imageButton9"
         android:layout_width="49dp"
         android:layout_height="39dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="#FF0000"
         app:layout_constraintBottom_toTopOf="@+id/textView40"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toEndOf="@+id/button19"
+        app:layout_constraintTop_toTopOf="@+id/button19"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/oeil2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <ImageButton
-        android:id="@+id/imageButton10"
-        android:layout_width="49dp"
-        android:layout_height="39dp"
-        android:backgroundTint="#FF0000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
-        app:layout_constraintStart_toEndOf="@+id/button20"
-        app:srcCompat="@drawable/oeil2"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/textView41"
-        android:layout_width="309dp"
-        android:layout_height="201dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="Vous serez amené à concevoir, développer et faire de la maintenance des sites web et des applications web, en utilisant une combinaison de compétences en développement front-end et back-end pour créer des expériences utilisateur interactives et fonctionnelles."
-        android:textAlignment="center"
-        android:textSize="17sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/textView30"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
