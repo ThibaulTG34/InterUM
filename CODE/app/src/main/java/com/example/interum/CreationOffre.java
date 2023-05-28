@@ -1,5 +1,6 @@
 package com.example.interum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,15 +16,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CreationOffre extends AppCompatActivity {
     @Override
@@ -51,53 +56,44 @@ public class CreationOffre extends AppCompatActivity {
     {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-// Obtenez une référence à la collection "offres"
+        // Obtenez une référence à la collection "offres"
         CollectionReference offresCollection = db.collection("offres");
 
         // Récupération des données de l'entreprise
         final String[] nomEntreprise = new String[1];
-        Query query = db.collection("entreprise").whereEqualTo("userID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query query = db.collection("entreprise").whereEqualTo("userID", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         // Exécutez la requête
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        String entrepriseId = document.getId();
-                        Map<String, Object> entrepriseData = document.getData();
-                        nomEntreprise[0] = (String) entrepriseData.get("Nom");
-                        // Utilisez les données de l'offre selon vos besoins
-
-                        // Par exemple, vous pouvez afficher les détails de l'offre dans une liste
-                    }
-                } else {
-                    // Une erreur s'est produite lors de la récupération des offres
-                    Toast.makeText(CreationOffre.this, "Récupération des données de l'entreprise échouée.", Toast.LENGTH_SHORT).show();
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot document : task.getResult()) {
+                    String entrepriseId = document.getId();
+                    Map<String, Object> entrepriseData = document.getData();
+                    nomEntreprise[0] = (String) entrepriseData.get("Nom");
                 }
+            } else {
+                Toast.makeText(CreationOffre.this, "Récupération des données de l'entreprise échouée.", Toast.LENGTH_SHORT).show();
             }
         });
 
-// Créez un objet Map pour stocker les données
-        Map<String, Object> offreData = new HashMap<>();
-        offreData.put("nom", name);
-        offreData.put("description", description);
-        offreData.put("periode", date);
-        offreData.put("salaire", salary);
-        offreData.put("Entreprise",nomEntreprise[0]);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userID = user.getUid();
 
-// Ajoutez les données à la collection "offres"
-        offresCollection.add(offreData)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
+        // Créez un objet Map pour stocker les données
+        db.collection("entreprises").document(userID).get().addOnSuccessListener(task->{
+            Map<String, Object> offreData = new HashMap<>();
+            offreData.put("nom", name);
+            offreData.put("description", description);
+            offreData.put("periode", date);
+            offreData.put("salaire", salary);
+            offreData.put("Entreprise", task.get("Nom"));
+
+            offresCollection.add(offreData)
+                    .addOnSuccessListener(documentReference -> {
                         Toast.makeText(CreationOffre.this, "Offre ajoutée avec succès.", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CreationOffre.this, "Échec de l'ajout de l'offre.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        startActivity(new Intent(CreationOffre.this, accueil_entreprise.class));
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(CreationOffre.this, "Échec de l'ajout de l'offre.", Toast.LENGTH_SHORT).show());
+        });
     }
+
 }

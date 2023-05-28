@@ -21,54 +21,65 @@
         android:id="@+id/SeeOffer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="#FF0000"
         android:text="Voir les offres"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:layout_constraintVertical_bias="0.011" />
 
     <Button
         android:id="@+id/SeeCandidatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
         android:layout_marginTop="27dp"
         android:backgroundTint="#FF0000"
         android:text="Mes candidatures"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SeeOffer" />
+        app:layout_constraintTop_toBottomOf="@+id/SeeOffer"
+        app:layout_constraintVertical_bias="0.011" />
 
     <Button
         android:id="@+id/SeeJobs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="137dp"
         android:layout_marginTop="36dp"
         android:backgroundTint="#FF1100"
         android:text="Mes emplois"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SeeCandidatures" />
+        app:layout_constraintTop_toBottomOf="@+id/SeeCandidatures"
+        app:layout_constraintVertical_bias="0.024" />
 
     <Button
         android:id="@+id/SeeAlerts"
         android:layout_width="188dp"
         android:layout_height="57dp"
-        android:layout_marginStart="111dp"
-        android:layout_marginTop="29dp"
         android:backgroundTint="#FF1100"
         android:text="Mes notifications"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SeeJobs" />
+        app:layout_constraintTop_toBottomOf="@+id/SeeJobs"
+        app:layout_constraintVertical_bias="0.167" />
 
     <Button
         android:id="@+id/instantCandidature"
         android:layout_width="188dp"
         android:layout_height="57dp"
-        android:layout_marginStart="111dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="#FF1100"
         android:text="Candidature Spontanée"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SeeAlerts" />
 </androidx.constraintlayout.widget.ConstraintLayout>

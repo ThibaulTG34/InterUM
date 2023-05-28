@@ -29,8 +29,7 @@ public class ConnexionEntreprise extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private boolean valide;
 
-    String nom, siret, id;
-
+    String nom, siret, id, password, tel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,22 +41,24 @@ public class ConnexionEntreprise extends AppCompatActivity {
         EditText nom = findViewById(R.id.editTextTextPersonName3);
         EditText id = findViewById(R.id.editTextTextPersonName8);
         EditText password = findViewById(R.id.editTextTextPersonName9);
-
-        this.nom = nom.getText().toString();
-        this.siret = siret.getText().toString();
-        this.id = id.getText().toString();
+        EditText tel = findViewById(R.id.editTextPhone3);
 
 
-        //EditText birth = findViewById(R.id.editTextTextPersonName6);
 
+        mAuth = FirebaseAuth.getInstance();
 
         valider.setOnClickListener(view -> {
 
-            if (!nom.getText().toString().equals("") && !id.getText().toString().equals("") && !password.getText().toString().equals("") && !siret.getText().toString().equals("") && password.getText().length() >= 8) {
-                Intent intention = new Intent(ConnexionEntreprise.this, accueil_entreprise.class);
+            if (!nom.getText().toString().equals("") && !id.getText().toString().equals("") && !password.getText().toString().equals("") && !siret.getText().toString().equals("") && password.getText().length() >= 8 && tel.getText().length() == 10) {
+                //Intent intention = new Intent(ConnexionEntreprise.this, accueil_entreprise.class);
                 //nom.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
-
-                startActivity(intention);
+                //startActivity(intention);
+                this.nom = nom.getText().toString();
+                this.siret = siret.getText().toString();
+                this.id = id.getText().toString();
+                this.password = password.getText().toString();
+                this.tel = tel.getText().toString();
+                signIn(id.getText().toString(), password.getText().toString());
             } else {
                 if (nom.getText().toString().equals("")) {
                     nom.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
@@ -78,7 +79,7 @@ public class ConnexionEntreprise extends AppCompatActivity {
         });
     }
 
-    private void createAccount(String email, String password) {
+    private void signIn(String email, String password) {
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -86,28 +87,12 @@ public class ConnexionEntreprise extends AppCompatActivity {
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         Intent intention = new Intent(ConnexionEntreprise.this, Validation_Inscription.class);
-
-                        // TODO : déplacer dans validation inscription en envoyant en extra dans l'intent pour avoir le currentUser id.
-                        FirebaseFirestore db  = FirebaseFirestore.getInstance();
-                        Map<String, Object> entrepriseData = new HashMap<>();
-                        entrepriseData.put("Nom", this.nom);
-                        entrepriseData.put("Siret", this.siret);
-                        entrepriseData.put("Id", this.id);
-                        db.collection("entreprises")
-                                .add(entrepriseData)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(ConnexionEntreprise.this, "Votre entreprise a été enregistrée avec succès.", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(ConnexionEntreprise.this, "Échec de l'enregistrement de l'entreprise.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                        //intention.putExtra("tel", telephone.getText().toString());
+                        Toast.makeText(ConnexionEntreprise.this, this.nom,
+                                Toast.LENGTH_SHORT).show();
+                        intention.putExtra("NomEntreprise", this.nom);
+                        intention.putExtra("Siret", this.siret);
+                        intention.putExtra("IdEntreprise", this.id);
+                        intention.putExtra("tel", this.tel);
                         startActivity(intention);
                         valide = true;
                     } else {

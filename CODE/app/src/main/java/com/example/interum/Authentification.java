@@ -88,7 +88,6 @@ public class Authentification extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         //Intent intention = new Intent(Authentification.this, MenuCandidat.class);
                         //startActivity(intention);
-
                     }
                 });
 

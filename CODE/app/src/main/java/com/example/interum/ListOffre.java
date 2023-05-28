@@ -34,8 +34,8 @@ public class ListOffre extends AppCompatActivity {
 
     private static final String TAG = "DATABASE : ";
     private static final int NB_OFFRE = 3;
-    private Boolean _switchIMAGE = false;
-    private Boolean _switchDESCRIPTION = false;
+    private final Boolean _switchIMAGE = false;
+    private final Boolean _switchDESCRIPTION = false;
     private int visibily;
 
     @SuppressLint("SetTextI18n")
@@ -60,9 +60,8 @@ public class ListOffre extends AppCompatActivity {
 
 
         ImageButton hideButton1 = findViewById(R.id.imageButton6);
-        ImageButton hideButton2 = findViewById(R.id.imageButton7);
-        ImageButton hideButton3 = findViewById(R.id.imageButton8);
-        ImageButton hideButton4 = findViewById(R.id.imageButton9);
+        ImageButton hideButton2 = findViewById(R.id.imageButton8);
+        ImageButton hideButton3 = findViewById(R.id.imageButton9);
 
         Button seeMoreButton1 = findViewById(R.id.button16);
         Button seeMoreButton2 = findViewById(R.id.button17);
@@ -74,18 +73,35 @@ public class ListOffre extends AppCompatActivity {
 
         ImageButton [] imageButtons = {hideButton1, hideButton2, hideButton3};
         Button [] buttons = {seeMoreButton1, seeMoreButton2, seeMoreButton3};
+        Button [] candi = {findViewById(R.id.candidater0), findViewById(R.id.candidater1), findViewById(R.id.candidater2)};
+
+        for (int i=0; i<titres.length; i++) {
+            if(titres[i].getText().toString().equals(""))
+            {
+                imageButtons[i].setVisibility(View.INVISIBLE);
+                buttons[i].setVisibility(View.INVISIBLE);
+                candi[i].setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                imageButtons[i].setVisibility(View.VISIBLE);
+                buttons[i].setVisibility(View.VISIBLE);
+                candi[i].setVisibility(View.VISIBLE);
+
+            }
+        }
 
         String city = getIntent().getStringExtra("location");
 
         if(city!= null && !city.equals(""))
         {
-            db.collection("accepter")
+            db.collection("offres")
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            for (int i=0; i<NB_OFFRE; i++) {
-                                titres[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("titre"));
-                                entreprises[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("entreprise"));
+                            for (int i=0; i<task.getResult().size(); i++) {
+                                titres[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("nom"));
+                                entreprises[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("Entreprise"));
                                 villes_tv[i].setText(city);
                             }
                         } else {
@@ -95,13 +111,13 @@ public class ListOffre extends AppCompatActivity {
         }
         else
         {
-            db.collection("refuser")
+            db.collection("offres")
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            for(int i=0; i<NB_OFFRE; i++) {
-                                titres[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("titre"));
-                                entreprises[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("entreprise"));
+                            for(int i=0; i<task.getResult().size(); i++) {
+                                titres[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("nom"));
+                                entreprises[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("Entreprise"));
                                 villes_tv[i].setText((String) Objects.requireNonNull(task.getResult().getDocuments().get(i).getData()).get("ville"));
                             }
                         } else {
