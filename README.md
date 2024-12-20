@@ -1,4 +1,5 @@
-# Développement d'une application mobile
+# Développement d'une application mobile 
+<img src="https://github.com/ThibaulTG34/InterUM-Application-Mobile/blob/master/RESULTATS/logo.png" alt="image" style="width:200px;height:auto;">
 
 ## Objectifs
 L'objectif de ce projet en binôme était de développer une application d'intérim dans laquelle deux profils sont disponibles :
@@ -8,7 +9,7 @@ L'objectif de ce projet en binôme était de développer une application d'inté
     - Consultation des candidatures
 
 - Profil entreprise
-    - Création ou suppression de ses offres d'emploi
+    - Création ou suppression d'offres d'emploi
     - Accepter ou refuser les candidatures
 
 ## Technologies utilisées
@@ -16,6 +17,9 @@ Nous devions développer ce projet sur Android Studio. Ensuite, nous avions cart
 
 ## Quelques pages de l'application
 
-<img src="https://github.com/ThibaulTG34/InterUM-Application-Mobile/RESULTATS/acceuil.jpg" alt="image" style="width:300px;height:auto;">
-
+<div><img src="https://github.com/ThibaulTG34/InterUM-Application-Mobile/blob/master/RESULTATS/acceuil.jpg" alt="image" style="width:200px;height:auto;">
+<img src="https://github.com/ThibaulTG34/InterUM-Application-Mobile/blob/master/RESULTATS/connexion.jpg" alt="image" style="width:200px;height:auto;">
+<img src="https://github.com/ThibaulTG34/InterUM-Application-Mobile/blob/master/RESULTATS/incrpitionentrperise.jpg" alt="image" style="width:200px;height:auto;">
+<img src="https://github.com/ThibaulTG34/InterUM-Application-Mobile/blob/master/RESULTATS/validation.jpg" alt="image" style="width:200px;height:auto;">
+</div>
 
